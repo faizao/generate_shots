@@ -22,8 +22,8 @@ from scipy.interpolate import interp1d
 import numpy as np
 configuration['log-level'] = 'WARNING'
 
-path = '/home/jonas/Desktop/vmodel2/'
-destino = '/home/jonas/Desktop/georec/'
+path = '/home/ubuntu/Desktop/vmodel2/'
+destino = '/home/ubuntu/Desktop/georec/'
 
 # all parameters below try to follow Yang and Ma as closely as possible 
 # Deep-learning inversion: A next-generation seismic velocity model building method
@@ -118,10 +118,10 @@ for nm in range(inicio,fim+1):
     print("Saving result to :",ofname)
     sio.savemat(ofname, {'rec': rec})
     
-    os.system('chmod 777 %s' %(ofname))
-    aws_s3_path = 's3://seismic-data-ml-marmousi_tr_2000/shots/frequency{}/georec{}.mat'.format(f,nm)
-    os.system('aws s3 cp %s %s' % (ofname, aws_s3_path))
-    os.system('rm -f %s' %(ofname))
+#    os.system('chmod 777 %s' %(ofname))
+#    aws_s3_path = 's3://seismic-data-ml-marmousi-training-2000/shots/frequency{}/georec{}.mat'.format(f,nm)
+#    os.system('aws s3 cp %s %s' % (ofname, aws_s3_path))
+#    os.system('rm -f %s' %(ofname))
     
     
     
