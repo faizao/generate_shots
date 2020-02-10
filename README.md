@@ -1,4 +1,5 @@
 # scripts_and_dockerfiles
 
-![Exemplo de um Shot]("shots.png")
-This folder contains scripts linux and dockerfiles of Machine Learning
+<img src="shots.png">
+
+This folder contains scripts to generate shots using software devito 4.0
