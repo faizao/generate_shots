@@ -28,7 +28,7 @@ destino = '/home/ubuntu/Desktop/georec/'
 
 # all parameters below try to follow Yang and Ma as closely as possible 
 # Deep-learning inversion: A next-generation seismic velocity model building method
-NumModels  = 1001       # number of synthetic velocity models 
+#NumModels  = 1001       # number of synthetic velocity models 
 nshots     = 29      # 29 shots equally spaced across top of domain (30 m below the surface)
 nreceivers = 301      # One recevier every grid point
 t0         = 0.      # Simulation starting time (0 ms)
@@ -67,7 +67,9 @@ for nm in range(inicio,fim+1):
     model = 'vmodel'+str(nm)+'.mat'
     modelname = path+model
     print("Frequencia{} Processing model :{}".format(str(f),str(model)))
-    v= sio.loadmat(modelname)
+    
+    #loading my data .mat
+    v= sio.loadmat(modelname) 
     v = v['vmodel']
     v = v.transpose() 
     v = v/1000 #normalizando meu dado para executar mais rÃ¡pido e nÃ£o ficar na escala de gigabytes
@@ -86,7 +88,6 @@ for nm in range(inicio,fim+1):
     source_locations[:,0] = np.linspace(0., 3000, num=nshots)
     source_locations[:,1] = 20.
     
-    #plot_velocity(model, source=source_locations)
     
     # Initialize receivers for collection of shot records
     rec_coordinates = np.empty((nreceivers, 2))
@@ -109,13 +110,12 @@ for nm in range(inicio,fim+1):
         
         if SHOT_NUM == 0: 
             rec = np.zeros((true.data.shape[0],301,29))
-#            print(true.data.shape)
         
         data = true.data
         rec[:,:,SHOT_NUM] = data
         SHOTRECORDS = 0
     
-    rec = interpolate_data(rec,dimension)
+    rec = interpolate_data(rec,dimension) #interpolo meus dados para a dimensão (201,301)
     ofname = destino+'georec{}.mat'.format(str(nm))
     print("Saving result to :",ofname)
     sio.savemat(ofname, {'rec': rec})
