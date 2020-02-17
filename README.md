@@ -21,7 +21,7 @@ O modelo de velocidade utilizado para gerar os shots pode ser visualizado logo a
 <img src="./figures/vmodel.png">
 
 
-# COMO RODAR OS DADOS
+# COMO EXECUTAR A SIMULAÇÃO
 
 
 Para paralelizar os códigos no processo de geração dos shots utilizei dos bashs de execução o ./run_batch.sh e o ./run_batch_spoonge.sh que contém a divisão dos arquivos de execução entre 8 processadores, de modo a maximizar o tempo de execução.
