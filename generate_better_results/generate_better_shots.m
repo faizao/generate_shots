@@ -1,10 +1,10 @@
 close all; clear;
 
-aux= load('recdata.mat').rec;
-aux= aux(1:25:end,1:2:end); %reduzi para uma dimensão legal (837,674);
+shot= load('recdata.mat').rec; % meu dado tinha dimensao (20904,1348)
+shot= shot(1:25:end,1:2:end); %reduzi para uma dimensão legal (837,674);
 
 
-shot2 = make_better_shots(aux);
+shot2 = make_better_shots(shot);
 
 function shot2 = make_better_shots(shot)
     limiar = 1e-7;
