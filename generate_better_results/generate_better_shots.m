@@ -1,6 +1,6 @@
 close all; clear;
 
-shot= load('recdata.mat').rec; % meu dado tinha dimensao (20904,1348)
+shot= load('../../recdata.mat').rec; % meu dado tinha dimensao (20904,1348)
 shot= shot(1:25:end,1:2:end); %reduzi para uma dimensão legal (837,674);
 
 
