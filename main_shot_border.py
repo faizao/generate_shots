@@ -22,8 +22,6 @@ from scipy.interpolate import interp1d
 import numpy as np
 configuration['log-level'] = 'WARNING'
 
-path = '/home/ubuntu/Desktop/vmodel2/'
-destino = '/home/ubuntu/Desktop/georec/'
 
 # all parameters below try to follow Yang and Ma as closely as possible 
 # Deep-learning inversion: A next-generation seismic velocity model building method
@@ -40,11 +38,15 @@ origin     = (0., 0.)   # What is the location of the top left corner. This is n
 SPACE_ORDER = 4         # spatial leading order of method 
 SPONGE_SIZE  = 40        # sponge layer size in grid points bordering side of grid 
 dimension = 2000;
-f = 20  #frequency
 
+f = int(sys.argv[3])  #frequency
 inicio=int(sys.argv[1])
 fim = int(sys.argv[2])
 
+path = '/home/jonas/Desktop/vmodels_border/'
+destino = '/home/jonas/Desktop/shots/georec{}/'.format(str(f))
+
+os.mkdir(destino)
 
 
 def interpolate_data(matriz,dimension):
@@ -61,7 +63,6 @@ def interpolate_data(matriz,dimension):
 #for nm in range(1,2):
 
 for nm in range(inicio,fim+1):
-#    nm=1001
 # Define a synthetic "true" velocity profile. The velocity is in km/s
 # load in velocity model
     model = 'vmodel'+str(nm)+'.mat'
@@ -70,7 +71,7 @@ for nm in range(inicio,fim+1):
     v= sio.loadmat(modelname)
     v = v['vmodel']
     v = v.transpose() 
-    v = v/1000 #normalizando meu dado para executar mais rÃ¡pido e nÃ£o ficar na escala de gigabytes
+    #v = v/1000 #normalizando meu dado para executar mais rÃ¡pido e nÃ£o ficar na escala de gigabytes
     #para os dados do marmousi não precisa normalizar
                 
     model = Model(vp=v, origin=origin, shape=shape,
@@ -117,11 +118,5 @@ for nm in range(inicio,fim+1):
     ofname = destino+'georec{}.mat'.format(str(nm))
     print("Saving result to :",ofname)
     sio.savemat(ofname, {'rec': rec})
-    
-#    os.system('chmod 777 %s' %(ofname))
-#    aws_s3_path = 's3://seismic-data-ml-marmousi-training-2000/shots/frequency{}/georec{}.mat'.format(f,nm)
-#    os.system('aws s3 cp %s %s' % (ofname, aws_s3_path))
-#    os.system('rm -f %s' %(ofname))
-    
     
     
