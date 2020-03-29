@@ -46,7 +46,9 @@ fim = int(sys.argv[2])
 path = '/home/jonas/Desktop/vmodels_border/'
 destino = '/home/jonas/Desktop/shots/georec{}/'.format(str(f))
 
-os.mkdir(destino)
+
+if not os.path.exists(destino):
+    os.mkdir(destino)
 
 
 def interpolate_data(matriz,dimension):
