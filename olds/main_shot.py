@@ -23,8 +23,8 @@ from scipy.interpolate import interp1d
 import numpy as np
 configuration['log-level'] = 'WARNING'
 
-path = '/home/jonas/genshots/vmodel/'
-destino = '/home/jonas/genshots/georec/'
+path = '/home/ubuntu/Desktop/vmodel/'
+destino = '/home/ubuntu/Desktop/georec/'
 
 # all parameters below try to follow Yang and Ma as closely as possible 
 # Deep-learning inversion: A next-generation seismic velocity model building method
@@ -39,7 +39,7 @@ shape      = (301, 201) # Number of grid point (nx, nz)
 spacing    = (10., 10.) # Grid spacing in m. 
 origin     = (0., 0.)   # What is the location of the top left corner. This is necessary to define
 SPACE_ORDER = 4         # spatial leading order of method 
-SPONGE_SIZE  = 100        # sponge layer size in grid points bordering side of grid 
+SPONGE_SIZE  = 40        # sponge layer size in grid points bordering side of grid 
 dimension = 2000;
 
 f =20 
