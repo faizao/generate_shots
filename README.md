@@ -5,7 +5,7 @@ Esta pasta contém scripts que podem ser utilizados para geração do modelo dir
 
 Abaixo apresento 3 shots gerados a partir do respectivo código, onde apresentamos os shots gerados a partir de fontes localizadas a 100, 1500 e 2900 metros de distância.
 
-<img src="./figures/shots.png">
+<img src="./olds/figures/shots.png">
 
 
 Todos os shots foram gerados com o auxílio do devito na versão 4.0, é possível realizar a instalação do mesmo pelo link [https://www.devitoproject.org/]. Também possuo um conteiner com a distribuição utilizada nesse projeto disponível no dockerHub conforme
@@ -18,7 +18,7 @@ Utilizando o comando "docker pull jmtargino/devito" você pode utilizar a distri
 Um exemplo de um modelo de velocidade utilizado para gerar os shots pode ser visualizado logo abaixo, o mesmo apresenta as dimensões (201,301)
 
 
-<img src="./figures/vmodel.png">
+<img src="./olds/figures/vmodel.png">
 
 
 # COMO EXECUTAR A SIMULAÇÃO
