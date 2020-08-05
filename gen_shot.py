@@ -3,14 +3,14 @@
 # and runs a forward model of the acoustic wave equation. For each synthetic model, it saves a shot record. 
 import argparse
 import numpy as np
-from devito import configuration
-from examples.seismic import Model,Receiver,AcquisitionGeometry,plot_shotrecord
-from examples.seismic.acoustic import AcousticWaveSolver
-from devito import Function, clear_cache, TimeFunction
 import scipy.io as sio
 from scipy.interpolate import interp1d
-configuration['log-level'] = 'WARNING'
 
+from devito import configuration
+from examples.seismic import Model,AcquisitionGeometry
+from examples.seismic.acoustic import AcousticWaveSolver
+from devito import clear_cache
+configuration['log-level'] = 'WARNING'
 
 parser = argparse.ArgumentParser(description='How to use this program')
 parser.add_argument("-f", "--freq", type=int, required=True, help="Frequency")
@@ -52,16 +52,14 @@ def interpolate_data(matriz,dimension):
     return np.float32(aux)
 
 
+### LOADING DATA
 model = 'vmodel' + str(num_model) + '.mat'
 modelname = path + model
 print("Frequencia{} Processing model :{}".format(str(frequency), str(model)))
-
-# loading my data .mat
-v = sio.loadmat(modelname)
+v = sio.loadmat(modelname) 
 v = v['vmodel']
 v = v.transpose()
-v = v / 1000  # normalizando meu dado para executar mais rapido e nao ficar na escala de gigabytes
-# para os dados do marmousi não precisa normalizar
+v = v / 1000  # normalizando para km/s
 
 model = Model(vp=v, origin=origin, shape=shape,
               spacing=spacing, space_order=SPACE_ORDER, bcs="damp", nbl=SPONGE_SIZE)
@@ -84,20 +82,17 @@ rec_coordinates[:, 1] = 20.
 f0 = frequency * 0.001
 geometry = AcquisitionGeometry(model, rec_coordinates, source_position,
                                t0, tn, f0=f0, src_type='Ricker')
-
 solver = AcousticWaveSolver(model, geometry, space_order=SPACE_ORDER)
-clear_cache()
-for SHOT_NUM in range(0, 29):
+
+for SHOT_NUM in range(0, nshots):
     print(num_model, '-', SHOT_NUM)
     clear_cache()
     geometry.src_positions[0, :] = source_locations[SHOT_NUM, :]
     true, _, _ = solver.forward(vp=model.vp)
-
+    shot = true.data
     if SHOT_NUM == 0:
-        rec = np.zeros((true.data.shape[0], 301, 29))
-
-    data = true.data
-    rec[:, :, SHOT_NUM] = data
+        rec = np.zeros((shot.shape[0], shot.shape[1], nshots))
+    rec[:, :, SHOT_NUM] = shot
 
 rec = interpolate_data(rec, dimension)  # interpolo meus dados para a dimensão (201,301)
 ofname = destino + 'georec{}.mat'.format(str(num_model))
