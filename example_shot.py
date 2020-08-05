@@ -14,14 +14,6 @@ from scipy import interpolate
 from scipy.interpolate import interp1d
 configuration['log-level'] = 'WARNING'
 
-
-#parser = argparse.ArgumentParser(description='How to use this program')
-#parser.add_argument("-f", "--freq", type=int, required=True, help="Frequency")
-#parser.add_argument("-m", "--model", type=int, required=True, help="Number of the model")
-#args = parser.parse_args()
-#f = args.freq
-#num_model = args.model
-
 path = './vmodel/'
 destino = './georec/'
 
@@ -107,4 +99,5 @@ def apply_shot(num_model,frequency):
     sio.savemat(ofname, {'rec': rec})
 
 
-
+if __name__ == "__main__":
+    apply_shot(1,20) #velocity model 1 and frequency equals 20
