@@ -11,9 +11,9 @@ def run(frequency,num_model,path,destino):
 if __name__ == "__main__":
     path = './vmodel/' #is mandatory
     base_destino = './shots/freq-'
-    num_cores = 8
+    num_cores = 63
     start_model = 1
-    end_model = 50
+    end_model = 10000
     frequencies=[10,15,20]
     
     for frequency in frequencies:
@@ -26,7 +26,7 @@ if __name__ == "__main__":
             threads=[]
             for i in range(num_cores):
                 if (contador <= end_model):
-                    t1 = threading.Thread(target = run,args=(frequency,contador,path,destino,))
+                    t1 = threading.Thread(target = run,args=(frequency,contador,path,destino,)) #creating thread and pass args to def run
                     threads.append(t1)
                     t1.start()
                     contador+=1 

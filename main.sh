@@ -8,5 +8,5 @@
 
 module load py-devito-4.2.1-intel-20.0.166-eiizm6q
 
-DEVITO_ARCH=gcc DEVITO_PLATFORM=skx python3 main.py
+DEVITO_ARCH=gcc DEVITO_PLATFORM=skx python3 principal.py
 
