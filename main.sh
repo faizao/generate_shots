@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -o log_shots.txt
-#SBATCH --partition=intel_large
+#SBATCH --partition=gpu_large
 #SBATCH -N 1
 #SBATCH -J jmtFCN
 #SBATCH --mail-type=ALL
