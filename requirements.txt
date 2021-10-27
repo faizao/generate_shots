@@ -14,7 +14,7 @@ codepy==2019.1
 contexttimer==0.3.3
 coverage==5.2
 cycler==0.10.0
-dask==2.20.0
+dask==2021.10.0
 decorator==4.4.2
 defusedxml==0.6.0
 -e git+https://github.com/devitocodes/devito.git@4096df36c3e679859f8cee1490a431f55fc5a2cb#egg=devito
