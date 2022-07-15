@@ -18,7 +18,7 @@ dask==2.20.0
 decorator==4.4.2
 defusedxml==0.6.0
 -e git+https://github.com/devitocodes/devito.git@4096df36c3e679859f8cee1490a431f55fc5a2cb#egg=devito
-distributed==2.19.0
+distributed==2021.10.0
 entrypoints==0.3
 flake8==3.8.3
 HeapDict==1.0.1
